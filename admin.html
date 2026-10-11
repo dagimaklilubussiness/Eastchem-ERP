@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner panel — East Chem PLC</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body data-page="admin">
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="East Chem PLC" class="brand-logo">
+      <span class="brand-tag" data-i18n="brand_tag">Agro-chemicals & Fertilizers</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home" data-i18n="nav_home">Home</a></li>
+      <li><a href="products.html" data-page="products" data-i18n="nav_products">Products</a></li>
+      <li><a href="about.html" data-page="about" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" data-page="contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn" aria-haspopup="true"><span class="lang-current">EN</span> ▾</button>
+        <div class="lang-menu"></div>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<div id="admin-gate" class="admin-gate">
+  <h1 data-i18n="ad_gate_h">Owner area</h1>
+  <form id="gate-form">
+    <div class="field">
+      <label for="gate-email" data-i18n="ad_gate_email">Email</label>
+      <input id="gate-email" name="email" type="email" required>
+    </div>
+    <div class="field">
+      <label for="gate-password" data-i18n="ad_gate_password">Password</label>
+      <input id="gate-password" name="password" type="password" required>
+    </div>
+    <p id="gate-error" hidden style="color:#7a2c22"></p>
+    <button type="submit" class="btn btn-primary" data-i18n="ad_enter">Enter</button>
+  </form>
+  <p id="gate-not-configured" class="note-box" hidden data-i18n="ad_gate_not_configured">Firebase isn't connected yet. Follow the README to set it up, then this panel will work.</p>
+</div>
+
+<div id="admin-wrap" class="admin-wrap">
+  <section class="band-tight">
+    <div class="container">
+      <div class="admin-toolbar" style="justify-content:space-between">
+        <h1 data-i18n="ad_dash_h" style="margin:0">Manage products</h1>
+        <div style="display:flex;gap:10px">
+          <button id="add-product-btn" class="btn btn-primary" data-i18n="ad_add">Add product</button>
+          <button id="logout-btn" class="btn btn-outline" data-i18n="ad_logout">Log out</button>
+        </div>
+      </div>
+
+      <div id="admin-form-panel" class="admin-form" style="display:none">
+        <h3 id="form-title" data-i18n="ad_form_new">New product</h3>
+        <form id="product-form">
+          <div class="grid2">
+            <div class="field">
+              <label for="f-cat" data-i18n="ad_f_cat">Category</label>
+              <select id="f-cat" name="category"></select>
+            </div>
+            <div class="field">
+              <label for="f-badge" data-i18n="ad_f_badge">Label on card</label>
+              <select id="f-badge" name="badge">
+                <option value="none" data-i18n="badge_none">None</option>
+                <option value="popular" data-i18n="badge_popular">Popular</option>
+                <option value="new" data-i18n="badge_new">New</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-img" data-i18n="ad_f_img">Image URL (optional)</label>
+            <input id="f-img" name="image" type="text" placeholder="https://… or photo.jpg">
+            <p class="note-box" style="padding:8px 12px;font-size:.8rem;margin-top:6px" data-i18n="ad_img_note"></p>
+          </div>
+
+          <div class="lang-tab-bar" id="lang-tab-bar">
+            <button type="button" class="lang-tab active" data-lang="en">English</button>
+            <button type="button" class="lang-tab" data-lang="am">አማርኛ</button>
+            <button type="button" class="lang-tab" data-lang="om">Afaan Oromoo</button>
+            <button type="button" class="lang-tab" data-lang="ti">ትግርኛ</button>
+          </div>
+
+          <div id="lang-panes">
+            <div class="lang-pane active" data-lang="en">
+              <div class="field"><label data-i18n="ad_f_name">Product name</label><input name="name_en"></div>
+              <div class="field"><label data-i18n="ad_f_desc">Short description</label><textarea name="desc_en"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_material">Active material / composition</label><input name="material_en"></div>
+              <div class="field"><label data-i18n="ad_f_usage">Usage instructions</label><textarea name="usage_en"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_pack">Package sizes (e.g. 25kg, 50kg)</label><input name="pack_en"></div>
+            </div>
+            <div class="lang-pane" data-lang="am">
+              <div class="field"><label data-i18n="ad_f_name">Product name</label><input name="name_am"></div>
+              <div class="field"><label data-i18n="ad_f_desc">Short description</label><textarea name="desc_am"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_material">Active material / composition</label><input name="material_am"></div>
+              <div class="field"><label data-i18n="ad_f_usage">Usage instructions</label><textarea name="usage_am"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_pack">Package sizes</label><input name="pack_am"></div>
+            </div>
+            <div class="lang-pane" data-lang="om">
+              <div class="field"><label data-i18n="ad_f_name">Product name</label><input name="name_om"></div>
+              <div class="field"><label data-i18n="ad_f_desc">Short description</label><textarea name="desc_om"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_material">Active material / composition</label><input name="material_om"></div>
+              <div class="field"><label data-i18n="ad_f_usage">Usage instructions</label><textarea name="usage_om"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_pack">Package sizes</label><input name="pack_om"></div>
+            </div>
+            <div class="lang-pane" data-lang="ti">
+              <div class="field"><label data-i18n="ad_f_name">Product name</label><input name="name_ti"></div>
+              <div class="field"><label data-i18n="ad_f_desc">Short description</label><textarea name="desc_ti"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_material">Active material / composition</label><input name="material_ti"></div>
+              <div class="field"><label data-i18n="ad_f_usage">Usage instructions</label><textarea name="usage_ti"></textarea></div>
+              <div class="field"><label data-i18n="ad_f_pack">Package sizes</label><input name="pack_ti"></div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <button type="submit" class="btn btn-primary" data-i18n="ad_save">Save product</button>
+            <button type="button" id="cancel-form-btn" class="btn btn-outline" data-i18n="ad_cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <table class="admin-table">
+        <thead><tr>
+          <th data-i18n="ad_th_name">Name</th>
+          <th data-i18n="ad_th_cat">Category</th>
+          <th data-i18n="ad_th_actions">Actions</th>
+        </tr></thead>
+        <tbody id="admin-tbody"></tbody>
+      </table>
+
+      <!-- ================= CATEGORIES ================= -->
+      <div class="admin-section-h">
+        <h2 data-i18n="ad_cat_h" style="margin:0">Manage categories</h2>
+        <button id="add-category-btn" class="btn btn-primary btn-sm" data-i18n="ad_cat_add">Add category</button>
+      </div>
+
+      <div id="category-form-panel" class="admin-form" style="display:none">
+        <form id="category-form">
+          <div class="grid2">
+            <div class="field">
+              <label for="c-color" data-i18n="ad_cat_color">Card color</label>
+              <input id="c-color" name="color" type="color" value="#7E9E3B" style="height:44px;padding:4px">
+            </div>
+          </div>
+          <div class="lang-tab-bar" data-tabgroup="cat">
+            <button type="button" class="lang-tab active" data-lang="en">English</button>
+            <button type="button" class="lang-tab" data-lang="am">አማርኛ</button>
+            <button type="button" class="lang-tab" data-lang="om">Afaan Oromoo</button>
+            <button type="button" class="lang-tab" data-lang="ti">ትግርኛ</button>
+          </div>
+          <div data-tabgroup-panes="cat">
+            <div class="lang-pane active" data-lang="en"><div class="field"><label data-i18n="ad_cat_name">Category name</label><input name="cname_en"></div></div>
+            <div class="lang-pane" data-lang="am"><div class="field"><label data-i18n="ad_cat_name">Category name</label><input name="cname_am"></div></div>
+            <div class="lang-pane" data-lang="om"><div class="field"><label data-i18n="ad_cat_name">Category name</label><input name="cname_om"></div></div>
+            <div class="lang-pane" data-lang="ti"><div class="field"><label data-i18n="ad_cat_name">Category name</label><input name="cname_ti"></div></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <button type="submit" class="btn btn-primary" data-i18n="ad_save_generic">Save</button>
+            <button type="button" id="cancel-category-btn" class="btn btn-outline" data-i18n="ad_cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <table class="admin-table">
+        <thead><tr>
+          <th data-i18n="ad_th_color">Color</th>
+          <th data-i18n="ad_th_name">Name</th>
+          <th data-i18n="ad_th_actions">Actions</th>
+        </tr></thead>
+        <tbody id="category-tbody"></tbody>
+      </table>
+
+      <!-- ================= FARMER STORIES ================= -->
+      <div class="admin-section-h">
+        <h2 data-i18n="ad_test_h" style="margin:0">Farmer stories</h2>
+        <button id="add-testimonial-btn" class="btn btn-primary btn-sm" data-i18n="ad_test_add">Add story</button>
+      </div>
+
+      <div id="testimonial-form-panel" class="admin-form" style="display:none">
+        <form id="testimonial-form">
+          <div class="field">
+            <label for="ts-name" data-i18n="ad_test_name">Farmer's name</label>
+            <input id="ts-name" name="tname">
+          </div>
+          <div class="field">
+            <label for="ts-media" data-i18n="ad_test_media_type">Photo or video?</label>
+            <select id="ts-media" name="mediaType">
+              <option value="photo" data-i18n="ad_test_photo">Photo</option>
+              <option value="video" data-i18n="ad_test_video">Video (max 2 min)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ts-filename" data-i18n="ad_test_filename">File name you'll upload (e.g. story-abebe.jpg)</label>
+            <input id="ts-filename" name="filename" placeholder="story-abebe.jpg">
+          </div>
+          <p class="note-box" data-i18n="ad_test_note"></p>
+          <div class="lang-tab-bar" data-tabgroup="test">
+            <button type="button" class="lang-tab active" data-lang="en">English</button>
+            <button type="button" class="lang-tab" data-lang="am">አማርኛ</button>
+            <button type="button" class="lang-tab" data-lang="om">Afaan Oromoo</button>
+            <button type="button" class="lang-tab" data-lang="ti">ትግርኛ</button>
+          </div>
+          <div data-tabgroup-panes="test">
+            <div class="lang-pane active" data-lang="en"><div class="field"><label data-i18n="ad_test_quote">Their experience</label><textarea name="quote_en"></textarea></div></div>
+            <div class="lang-pane" data-lang="am"><div class="field"><label data-i18n="ad_test_quote">Their experience</label><textarea name="quote_am"></textarea></div></div>
+            <div class="lang-pane" data-lang="om"><div class="field"><label data-i18n="ad_test_quote">Their experience</label><textarea name="quote_om"></textarea></div></div>
+            <div class="lang-pane" data-lang="ti"><div class="field"><label data-i18n="ad_test_quote">Their experience</label><textarea name="quote_ti"></textarea></div></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <button type="submit" class="btn btn-primary" data-i18n="ad_save_generic">Save</button>
+            <button type="button" id="cancel-testimonial-btn" class="btn btn-outline" data-i18n="ad_cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <table class="admin-table">
+        <thead><tr>
+          <th data-i18n="ad_test_name">Farmer's name</th>
+          <th data-i18n="ad_th_actions">Actions</th>
+        </tr></thead>
+        <tbody id="testimonial-tbody"></tbody>
+      </table>
+
+      <!-- ================= SOCIAL LINKS ================= -->
+      <h2 data-i18n="ad_social_h">Social links</h2>
+      <form id="social-form" class="admin-form">
+        <div class="grid2">
+          <div class="field"><label data-i18n="social_telegram">Telegram</label><input name="telegram" type="url" placeholder="https://t.me/…"></div>
+          <div class="field"><label data-i18n="social_email">Email</label><input name="email" type="email" placeholder="info@…"></div>
+          <div class="field"><label data-i18n="social_facebook">Facebook</label><input name="facebook" type="url" placeholder="https://facebook.com/…"></div>
+          <div class="field"><label data-i18n="social_tiktok">TikTok</label><input name="tiktok" type="url" placeholder="https://tiktok.com/@…"></div>
+          <div class="field"><label data-i18n="social_instagram">Instagram</label><input name="instagram" type="url" placeholder="https://instagram.com/…"></div>
+        </div>
+        <button type="submit" class="btn btn-primary" data-i18n="ad_social_save">Save links</button>
+      </form>
+
+      <div style="margin-top:40px">
+        <div class="admin-toolbar">
+          <button id="reset-btn" class="btn btn-outline btn-sm" data-i18n="ad_reset_btn">Reset to sample products</button>
+        </div>
+      </div>
+
+      <!-- ================= SITE CONTENT ================= -->
+      <div class="admin-section-h">
+        <h2 data-i18n="ad_content_h" style="margin:0">Site content</h2>
+      </div>
+
+      <h3 data-i18n="ad_content_hero_h">Homepage hero & stats</h3>
+      <form id="content-hero-form" class="admin-form">
+        <div class="lang-tab-bar">
+          <button type="button" class="lang-tab active" data-lang="en">English</button>
+          <button type="button" class="lang-tab" data-lang="am">አማርኛ</button>
+          <button type="button" class="lang-tab" data-lang="om">Afaan Oromoo</button>
+          <button type="button" class="lang-tab" data-lang="ti">ትግርኛ</button>
+        </div>
+        <div>
+          <div class="lang-pane active" data-lang="en">
+            <div class="field"><label data-i18n="ad_c_eyebrow">Small heading above the title</label><input name="hero_eyebrow_en"></div>
+            <div class="field"><label data-i18n="ad_c_title">Main headline</label><input name="hero_title_en"></div>
+            <div class="field"><label data-i18n="ad_c_subtitle">Subtitle paragraph</label><textarea name="hero_subtitle_en"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_label">Label</label><input name="stat1_label_en" placeholder="years in the field"></div>
+            <div class="field"><input name="stat2_label_en" placeholder="districts supplied"></div>
+            <div class="field"><input name="stat3_label_en" placeholder="farmers reached"></div>
+          </div>
+          <div class="lang-pane" data-lang="am">
+            <div class="field"><label data-i18n="ad_c_eyebrow">Small heading above the title</label><input name="hero_eyebrow_am"></div>
+            <div class="field"><label data-i18n="ad_c_title">Main headline</label><input name="hero_title_am"></div>
+            <div class="field"><label data-i18n="ad_c_subtitle">Subtitle paragraph</label><textarea name="hero_subtitle_am"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_label">Label</label><input name="stat1_label_am"></div>
+            <div class="field"><input name="stat2_label_am"></div>
+            <div class="field"><input name="stat3_label_am"></div>
+          </div>
+          <div class="lang-pane" data-lang="om">
+            <div class="field"><label data-i18n="ad_c_eyebrow">Small heading above the title</label><input name="hero_eyebrow_om"></div>
+            <div class="field"><label data-i18n="ad_c_title">Main headline</label><input name="hero_title_om"></div>
+            <div class="field"><label data-i18n="ad_c_subtitle">Subtitle paragraph</label><textarea name="hero_subtitle_om"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_label">Label</label><input name="stat1_label_om"></div>
+            <div class="field"><input name="stat2_label_om"></div>
+            <div class="field"><input name="stat3_label_om"></div>
+          </div>
+          <div class="lang-pane" data-lang="ti">
+            <div class="field"><label data-i18n="ad_c_eyebrow">Small heading above the title</label><input name="hero_eyebrow_ti"></div>
+            <div class="field"><label data-i18n="ad_c_title">Main headline</label><input name="hero_title_ti"></div>
+            <div class="field"><label data-i18n="ad_c_subtitle">Subtitle paragraph</label><textarea name="hero_subtitle_ti"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_label">Label</label><input name="stat1_label_ti"></div>
+            <div class="field"><input name="stat2_label_ti"></div>
+            <div class="field"><input name="stat3_label_ti"></div>
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:6px">
+          <div class="field"><label data-i18n="ad_c_number">Number</label><input name="stat1_num" placeholder="12+"></div>
+          <div class="field"><input name="stat2_num" placeholder="40+"></div>
+        </div>
+        <div class="field"><input name="stat3_num" placeholder="6,000+"></div>
+        <button type="submit" class="btn btn-primary" data-i18n="ad_save_generic">Save</button>
+      </form>
+
+      <h3 data-i18n="ad_content_contact_h">Contact page info</h3>
+      <form id="content-contact-form" class="admin-form">
+        <div class="grid2">
+          <div class="field"><label data-i18n="ct_phone_l">Phone</label><input name="contact_phone"></div>
+          <div class="field"><label data-i18n="ct_email_l">Email</label><input name="contact_email"></div>
+        </div>
+        <div class="lang-tab-bar">
+          <button type="button" class="lang-tab active" data-lang="en">English</button>
+          <button type="button" class="lang-tab" data-lang="am">አማርኛ</button>
+          <button type="button" class="lang-tab" data-lang="om">Afaan Oromoo</button>
+          <button type="button" class="lang-tab" data-lang="ti">ትግርኛ</button>
+        </div>
+        <div>
+          <div class="lang-pane active" data-lang="en">
+            <div class="field"><label data-i18n="ct_addr_l">Address</label><input name="contact_address_en"></div>
+            <div class="field"><label data-i18n="ct_hours_l">Hours</label><input name="contact_hours_en"></div>
+          </div>
+          <div class="lang-pane" data-lang="am">
+            <div class="field"><label data-i18n="ct_addr_l">Address</label><input name="contact_address_am"></div>
+            <div class="field"><label data-i18n="ct_hours_l">Hours</label><input name="contact_hours_am"></div>
+          </div>
+          <div class="lang-pane" data-lang="om">
+            <div class="field"><label data-i18n="ct_addr_l">Address</label><input name="contact_address_om"></div>
+            <div class="field"><label data-i18n="ct_hours_l">Hours</label><input name="contact_hours_om"></div>
+          </div>
+          <div class="lang-pane" data-lang="ti">
+            <div class="field"><label data-i18n="ct_addr_l">Address</label><input name="contact_address_ti"></div>
+            <div class="field"><label data-i18n="ct_hours_l">Hours</label><input name="contact_hours_ti"></div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" data-i18n="ad_save_generic">Save</button>
+      </form>
+
+      <h3 data-i18n="ad_content_about_h">About page</h3>
+      <form id="content-about-form" class="admin-form">
+        <div class="lang-tab-bar">
+          <button type="button" class="lang-tab active" data-lang="en">English</button>
+          <button type="button" class="lang-tab" data-lang="am">አማርኛ</button>
+          <button type="button" class="lang-tab" data-lang="om">Afaan Oromoo</button>
+          <button type="button" class="lang-tab" data-lang="ti">ትግርኛ</button>
+        </div>
+        <div>
+          <div class="lang-pane active" data-lang="en">
+            <div class="field"><label data-i18n="ad_c_lede">Intro paragraph</label><textarea name="ab_lede_en"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_mission_title">Mission heading</label><input name="ab_mission_title_en"></div>
+            <div class="field"><label data-i18n="ad_c_mission_text">Mission text</label><textarea name="ab_mission_text_en"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_story_heading">Story section heading</label><input name="ab_story_heading_en"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_year">Year / stage</label><input name="ab_t1_year_en"></div><div class="field"><label data-i18n="ad_c_text">Description</label><input name="ab_t1_text_en"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t2_year_en"></div><div class="field"><input name="ab_t2_text_en"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t3_year_en"></div><div class="field"><input name="ab_t3_text_en"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t4_year_en"></div><div class="field"><input name="ab_t4_text_en"></div></div>
+            <div class="field"><label data-i18n="ad_c_values_heading">Values section heading</label><input name="ab_values_heading_en"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_value_title">Value title</label><input name="ab_v1_title_en"></div><div class="field"><label data-i18n="ad_c_value_text">Value description</label><input name="ab_v1_text_en"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v2_title_en"></div><div class="field"><input name="ab_v2_text_en"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v3_title_en"></div><div class="field"><input name="ab_v3_text_en"></div></div>
+          </div>
+          <div class="lang-pane" data-lang="am">
+            <div class="field"><label data-i18n="ad_c_lede">Intro paragraph</label><textarea name="ab_lede_am"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_mission_title">Mission heading</label><input name="ab_mission_title_am"></div>
+            <div class="field"><label data-i18n="ad_c_mission_text">Mission text</label><textarea name="ab_mission_text_am"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_story_heading">Story section heading</label><input name="ab_story_heading_am"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_year">Year / stage</label><input name="ab_t1_year_am"></div><div class="field"><label data-i18n="ad_c_text">Description</label><input name="ab_t1_text_am"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t2_year_am"></div><div class="field"><input name="ab_t2_text_am"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t3_year_am"></div><div class="field"><input name="ab_t3_text_am"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t4_year_am"></div><div class="field"><input name="ab_t4_text_am"></div></div>
+            <div class="field"><label data-i18n="ad_c_values_heading">Values section heading</label><input name="ab_values_heading_am"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_value_title">Value title</label><input name="ab_v1_title_am"></div><div class="field"><label data-i18n="ad_c_value_text">Value description</label><input name="ab_v1_text_am"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v2_title_am"></div><div class="field"><input name="ab_v2_text_am"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v3_title_am"></div><div class="field"><input name="ab_v3_text_am"></div></div>
+          </div>
+          <div class="lang-pane" data-lang="om">
+            <div class="field"><label data-i18n="ad_c_lede">Intro paragraph</label><textarea name="ab_lede_om"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_mission_title">Mission heading</label><input name="ab_mission_title_om"></div>
+            <div class="field"><label data-i18n="ad_c_mission_text">Mission text</label><textarea name="ab_mission_text_om"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_story_heading">Story section heading</label><input name="ab_story_heading_om"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_year">Year / stage</label><input name="ab_t1_year_om"></div><div class="field"><label data-i18n="ad_c_text">Description</label><input name="ab_t1_text_om"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t2_year_om"></div><div class="field"><input name="ab_t2_text_om"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t3_year_om"></div><div class="field"><input name="ab_t3_text_om"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t4_year_om"></div><div class="field"><input name="ab_t4_text_om"></div></div>
+            <div class="field"><label data-i18n="ad_c_values_heading">Values section heading</label><input name="ab_values_heading_om"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_value_title">Value title</label><input name="ab_v1_title_om"></div><div class="field"><label data-i18n="ad_c_value_text">Value description</label><input name="ab_v1_text_om"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v2_title_om"></div><div class="field"><input name="ab_v2_text_om"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v3_title_om"></div><div class="field"><input name="ab_v3_text_om"></div></div>
+          </div>
+          <div class="lang-pane" data-lang="ti">
+            <div class="field"><label data-i18n="ad_c_lede">Intro paragraph</label><textarea name="ab_lede_ti"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_mission_title">Mission heading</label><input name="ab_mission_title_ti"></div>
+            <div class="field"><label data-i18n="ad_c_mission_text">Mission text</label><textarea name="ab_mission_text_ti"></textarea></div>
+            <div class="field"><label data-i18n="ad_c_story_heading">Story section heading</label><input name="ab_story_heading_ti"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_year">Year / stage</label><input name="ab_t1_year_ti"></div><div class="field"><label data-i18n="ad_c_text">Description</label><input name="ab_t1_text_ti"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t2_year_ti"></div><div class="field"><input name="ab_t2_text_ti"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t3_year_ti"></div><div class="field"><input name="ab_t3_text_ti"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_t4_year_ti"></div><div class="field"><input name="ab_t4_text_ti"></div></div>
+            <div class="field"><label data-i18n="ad_c_values_heading">Values section heading</label><input name="ab_values_heading_ti"></div>
+            <div class="grid2"><div class="field"><label data-i18n="ad_c_value_title">Value title</label><input name="ab_v1_title_ti"></div><div class="field"><label data-i18n="ad_c_value_text">Value description</label><input name="ab_v1_text_ti"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v2_title_ti"></div><div class="field"><input name="ab_v2_text_ti"></div></div>
+            <div class="grid2"><div class="field"><input name="ab_v3_title_ti"></div><div class="field"><input name="ab_v3_text_ti"></div></div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" data-i18n="ad_save_generic">Save</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="i18n.js"></script>
+<script src="categories-data.js"></script>
+<script src="products-data.js"></script>
+<script src="extras-data.js"></script>
+<script src="content-data.js"></script>
+<script src="main.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

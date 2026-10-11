@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>East Chem PLC — Agro-chemicals & Fertilizers</title>
+<meta name="description" content="East Chem PLC supplies fertilizers, crop-protection chemicals and seed treatments to farmers and distributors across Ethiopia.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body data-page="home">
+
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="East Chem PLC" class="brand-logo">
+      <span class="brand-tag" data-i18n="brand_tag">Agro-chemicals & Fertilizers</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home" data-i18n="nav_home">Home</a></li>
+      <li><a href="products.html" data-page="products" data-i18n="nav_products">Products</a></li>
+      <li><a href="about.html" data-page="about" data-i18n="nav_about">About</a></li>
+      <li><a href="contact.html" data-page="contact" data-i18n="nav_contact">Contact</a></li>
+      <li><a href="admin.html" class="admin-link" data-i18n="admin_link">Owner login</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn" aria-haspopup="true"><span class="lang-current">EN</span> ▾</button>
+        <div class="lang-menu"></div>
+      </div>
+      <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero-photo">
+  <div class="img-slot hero-photo-media" data-slot="hero.jpg">
+    <img src="hero.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')">
+    <div class="img-slot-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-4 4-3-3-6 6"/></svg>
+      <b>hero.jpg</b>
+      <span data-i18n="slot_hero">Wide photo (1600px+) — your warehouse, a sack pile, or a green field</span>
+    </div>
+    <div class="hero-photo-overlay">
+      <p class="hero-eyebrow" id="hero-eyebrow">Ethiopian-owned, farm-tested</p>
+      <h1 id="hero-title">Grown from the soil up.</h1>
+      <p class="lede" id="hero-subtitle">East Chem PLC supplies fertilizers, crop-protection chemicals and seed treatments to farmers and distributors across Ethiopia — with clear guidance on what to use, and how.</p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn btn-primary" data-i18n="hero_cta1">Browse products</a>
+        <a href="contact.html" class="btn btn-outline" data-i18n="hero_cta2" style="background:rgba(255,255,255,.92)">Talk to our team</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats-card" id="hero-stats-card"></div>
+</section>
+
+<section class="band band-alt">
+  <div class="container">
+    <h2 data-i18n="cat_heading">What we supply</h2>
+    <p class="lede" data-i18n="cat_sub">Four lines, one goal: healthier fields and better yields.</p>
+    <div class="cat-photo-grid" id="category-grid"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <div class="advisor">
+      <div>
+        <h2 data-i18n="adv_heading">Not sure where to start?</h2>
+        <p class="lede" data-i18n="adv_sub">Tell us your crop and the problem you're seeing — we'll point you to the right category.</p>
+        <form id="advisor-form">
+          <div class="field">
+            <label for="adv-crop" data-i18n="adv_crop">Crop</label>
+            <select id="adv-crop" name="crop">
+              <option value="teff" data-i18n="crop_teff">Teff</option>
+              <option value="maize" data-i18n="crop_maize">Maize</option>
+              <option value="wheat" data-i18n="crop_wheat">Wheat</option>
+              <option value="barley" data-i18n="crop_barley">Barley</option>
+              <option value="sorghum" data-i18n="crop_sorghum">Sorghum</option>
+              <option value="vegetables" data-i18n="crop_vegetables">Vegetables</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="adv-concern" data-i18n="adv_concern">What's the issue?</label>
+            <select id="adv-concern" name="concern">
+              <option value="weeds" data-i18n="concern_weeds">Weeds taking over the field</option>
+              <option value="insects" data-i18n="concern_insects">Insects or pests on the crop</option>
+              <option value="fungal" data-i18n="concern_fungal">Leaf spots or fungal disease</option>
+              <option value="fertility" data-i18n="concern_fertility">Low soil fertility / poor growth</option>
+              <option value="seedborne" data-i18n="concern_seedborne">Protecting seed before sowing</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="adv-soil" data-i18n="adv_soil">Soil condition</label>
+            <select id="adv-soil" name="soil">
+              <option value="unsure" data-i18n="soil_unsure">Not sure</option>
+              <option value="sandy" data-i18n="soil_sandy">Sandy, drains fast</option>
+              <option value="clay" data-i18n="soil_clay">Heavy / clay soil</option>
+              <option value="loamy" data-i18n="soil_loamy">Balanced / loamy</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="adv_btn">Show recommendation</button>
+        </form>
+      </div>
+      <div id="advisor-result" class="advisor-result empty">
+        <p data-i18n="adv_empty">Your recommendation will appear here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt">
+  <div class="container">
+    <h2 data-i18n="feat_heading">Popular right now</h2>
+    <div class="product-grid" id="featured-grid"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <h2 data-i18n="gallery_h">A look at East Chem</h2>
+    <div class="gallery-grid">
+      <div>
+        <div class="img-slot" data-slot="gallery-1.jpg">
+          <img src="gallery-1.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')">
+          <div class="img-slot-hint"><b>gallery-1.jpg</b><span data-i18n="slot_gallery1">Your shop front, warehouse or delivery truck</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="img-slot" data-slot="gallery-2.jpg">
+          <img src="gallery-2.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')">
+          <div class="img-slot-hint"><b>gallery-2.jpg</b><span data-i18n="slot_gallery2">Staff or farmers at work</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="img-slot" data-slot="gallery-3.jpg">
+          <img src="gallery-3.jpg" alt="" onerror="this.parentElement.classList.add('img-missing')">
+          <div class="img-slot-hint"><b>gallery-3.jpg</b><span data-i18n="slot_gallery3">A healthy field or harvest</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="testimonials-section">
+  <div class="container">
+    <h2 data-i18n="test_h">What farmers say</h2>
+    <p class="lede" data-i18n="test_sub">Real results, in their own words.</p>
+    <div class="testimonial-grid" id="testimonials-grid"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <h2 data-i18n="why_heading">Why farmers work with us</h2>
+    <div class="value-grid">
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+        <h3 data-i18n="why1_t">Products we stand behind</h3>
+        <p data-i18n="why1_d">Every item is registered and sourced from manufacturers we've vetted directly.</p>
+      </div>
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <h3 data-i18n="why2_t">Guidance in your language</h3>
+        <p data-i18n="why2_d">Usage instructions and dosage explained clearly — not just printed on the sack.</p>
+      </div>
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-7h14l2 7"/><path d="M5 12h14v7H5z"/><circle cx="8" cy="19" r="1.5"/><circle cx="16" cy="19" r="1.5"/></svg>
+        <h3 data-i18n="why3_t">Stock where you need it</h3>
+        <p data-i18n="why3_d">Distribution reaching woreda-level agro-dealers, not just regional capitals.</p>
+      </div>
+      <div class="value-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12l3 3 5-6"/><circle cx="12" cy="12" r="10"/></svg>
+        <h3 data-i18n="why4_t">Honest advice</h3>
+        <p data-i18n="why4_d">If a product isn't right for your field, we'll tell you before you buy it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-dark cta-band">
+  <div class="container">
+    <h2 data-i18n="cta_h">Have a question about your field?</h2>
+    <p class="lede" style="margin:0 auto 24px" data-i18n="cta_s">Reach out and we'll help you find the right product — no pressure, no sales script.</p>
+    <a href="contact.html" class="btn btn-gold" data-i18n="cta_btn">Contact East Chem</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h4 data-i18n="f_about_h">East Chem PLC</h4>
+      <p data-i18n="f_about_d">Agro-chemicals and fertilizers for Ethiopian farmers, supplied with honest guidance.</p>
+    </div>
+    <div>
+      <h4 data-i18n="f_links_h">Quick links</h4>
+      <ul>
+        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+        <li><a href="products.html" data-i18n="nav_products">Products</a></li>
+        <li><a href="about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="contact.html" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="f_contact_h">Contact</h4>
+      <ul>
+        <li>info@eastchem.example</li>
+        <li>+251 9xx xxx xxx</li>
+      </ul>
+      <div class="social-row" id="social-icons"></div>
+    </div>
+    <div>
+      <h4>Language</h4>
+      <ul id="footer-lang"></ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year"></span> East Chem PLC. <span data-i18n="f_rights">All rights reserved.</span></span>
+    <span class="watermark">Built by <a href="https://t.me/dagdevio" target="_blank" rel="noopener">DagDevIO</a> · <a href="https://www.linkedin.com/in/dagim-aklilu-478b76357" target="_blank" rel="noopener">LinkedIn</a></span>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="product-modal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" aria-label="Close">✕</button>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="i18n.js"></script>
+<script src="categories-data.js"></script>
+<script src="products-data.js"></script>
+<script src="extras-data.js"></script>
+<script src="content-data.js"></script>
+<script src="main.js"></script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const fl = document.getElementById("footer-lang");
+  SUPPORTED_LANGS.forEach(l => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#"; a.textContent = I18N[l].lang_names[l];
+    a.addEventListener("click", (e) => { e.preventDefault(); setLang(l); location.reload(); });
+    li.appendChild(a); fl.appendChild(li);
+  });
+</script>
+</body>
+</html>
